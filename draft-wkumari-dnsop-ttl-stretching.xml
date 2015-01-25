@@ -45,24 +45,45 @@
     <date day="30" month="January" year="2014"/>
 
     <abstract>
-      <t>DNS Resorce Records may be cached for up to thier TTL</t>
+      <t>The TTL of a DNS Resource Record expresses how long a record may be
+      cached before it should be discarded. This document discusses the
+      possibility of "stretching TTLS" (using them past their expiration) if
+      they cannot be refreshed. This works on the assumption that stale data
+      may be better than no data. </t>
+
+      <t>PLEASE NOTE: This document is a strawman to drive discussion. It may
+      or may not be a good idea, this document documents the idea so that
+      there is something concrete to throw tomatoes at.</t>
 
       <t>[ Ed note: Text inside square brackets ([]) is additional background
       information, answers to freqently asked questions, general musings, etc.
-      They will be removed before publication.]</t>
-
-      <t>[ This document is being collaborated on in Github at:
-      https://github.com/__URL__. The most recent version of the document,
-      open issues, etc should all be available here. The authors (gratefully)
-      accept pull requests ]</t>
+      They will be removed before publication. This document is being
+      collaborated on in Github at:
+      https://github.com/wkumari/draft-wkumari-dnsop-ttl-stretching. The most
+      recent version of the document, open issues, etc should all be available
+      here. The authors (gratefully) accept pull requests ]</t>
     </abstract>
   </front>
 
   <middle>
     <section title="Introduction">
-      <t>This document is a template.</t>
+      <t>DNS Resource Records (RR) have an associated TTL. This is how long
+      the record may be cached before it should be expired and new information
+      fetched. This is based upon the assumption that the authorative servers
+      will be reachable when they are needed, and that records expire and are
+      immediatly evicted from the cache.</t>
 
-      <t/>
+      <t>There are a number of reasons why an authorative server may become
+      unreachable, including, unfortunalty, Denial of Service (DoS) attacks.
+      Recent proposals, for exmaple "Highly Automated Method for Maintaining
+      Expiring Records" (<xref target="I-D.wkumari-dnsop-hammer"/>) propose
+      refreshing records in the cache before they expire and are evicted. This
+      means that the recursive server still has information in its cache when
+      it attempts to contact the authorative server. </t>
+
+      <t>This document suggests that, if the recursive server is unable to
+      contact the authorative server, it simply extends the existing records
+      TTL, on the assumption that "stale bread if better than no bread". </t>
 
       <t>Here is a reference to an "external" (non-RFC / draft) thing: (<xref
       target="IANA.AS_Numbers"/>). And this is a link to an ID:<xref
@@ -116,7 +137,10 @@
     </references>
 
     <references title="Informative References">
-      <?rfc include='reference.I-D.draft-ietf-sidr-iana-objects-03.xml'?>
+      <?rfc include='reference.I-D.draft-ietf-sidr-iana-objects-03.xml'
+?>
+
+      <?rfc include='reference.I-D.draft-wkumari-dnsop-hammer-00.xml'?>
     </references>
 
     <section title="Changes / Author Notes.">

@@ -4,27 +4,34 @@
 
 
 
-template                                                       W. Kumari
+Network Working Group                                          W. Kumari
 Internet-Draft                                                    Google
-Intended status: Informational                          January 30, 2015
-Expires: August 3, 2015
+Intended status: Informational                          January 30, 2014
+Expires: August 3, 2014
 
 
-                            TODO: Template.
-                       draft-wkumari-template-00
+                          Stretching DNS TTLs
+                 draft-wkumari-dnsop-ttl-stretching-00
 
 Abstract
 
-   This is my standard ID Template.
+   The TTL of a DNS Resource Record expresses how long a record may be
+   cached before it should be discarded.  This document discusses the
+   possibility of "stretching TTLS" (using them past their expiration)
+   if they cannot be refreshed.  This works on the assumption that stale
+   data may be better than no data.
+
+   PLEASE NOTE: This document is a strawman to drive discussion.  It may
+   or may not be a good idea, this document documents the idea so that
+   there is something concrete to throw tomatoes at.
 
    [ Ed note: Text inside square brackets ([]) is additional background
    information, answers to freqently asked questions, general musings,
-   etc.  They will be removed before publication.]
-
-   [ This document is being collaborated on in Github at:
-   https://github.com/__URL__. The most recent version of the document,
-   open issues, etc should all be available here.  The authors
-   (gratefully) acept pull requests ]
+   etc.  They will be removed before publication.  This document is
+   being collaborated on in Github at: https://github.com/wkumari/draft-
+   wkumari-dnsop-ttl-stretching.  The most recent version of the
+   document, open issues, etc should all be available here.  The authors
+   (gratefully) accept pull requests ]
 
 Status of This Memo
 
@@ -41,25 +48,27 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 3, 2015.
+   This Internet-Draft will expire on August 3, 2014.
+
+
+
+
+
+
+Kumari                   Expires August 3, 2014                 [Page 1]
+
+Internet-Draft                TTL Stretchng                 January 2014
+
 
 Copyright Notice
 
-   Copyright (c) 2015 IETF Trust and the persons identified as the
+   Copyright (c) 2014 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
-
-
-
-Kumari                   Expires August 3, 2015                 [Page 1]
-
-Internet-Draft                  template                    January 2015
-
-
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
@@ -69,20 +78,46 @@ Internet-Draft                  template                    January 2015
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  Requirements notation . . . . . . . . . . . . . . . . . .   2
-   2.  Another section.  . . . . . . . . . . . . . . . . . . . . . .   2
-   3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   2
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   2
+     1.1.  Requirements notation . . . . . . . . . . . . . . . . . .   3
+   2.  Another section.  . . . . . . . . . . . . . . . . . . . . . .   3
+   3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   3
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
    5.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   3
    6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   3
      6.1.  Normative References  . . . . . . . . . . . . . . . . . .   3
      6.2.  Informative References  . . . . . . . . . . . . . . . . .   3
-   Appendix A.  Changes / Author Notes.  . . . . . . . . . . . . . .   3
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   Appendix A.  Changes / Author Notes.  . . . . . . . . . . . . . .   4
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
 
 1.  Introduction
 
-   This document is a template.
+   DNS Resource Records (RR) have an associated TTL.  This is how long
+   the record may be cached before it should be expired and new
+   information fetched.  This is based upon the assumption that the
+   authorative servers will be reachable when they are needed, and that
+   records expire and are immediatly evicted from the cache.
+
+   There are a number of reasons why an authorative server may become
+   unreachable, including, unfortunalty, Denial of Service (DoS)
+   attacks.  Recent proposals, for exmaple "Highly Automated Method for
+   Maintaining Expiring Records" ([I-D.wkumari-dnsop-hammer]) propose
+   refreshing records in the cache before they expire and are evicted.
+   This means that the recursive server still has information in its
+   cache when it attempts to contact the authorative server.
+
+   This document suggests that, if the recursive server is unable to
+   contact the authorative server, it simply extends the existing
+
+
+
+
+Kumari                   Expires August 3, 2014                 [Page 2]
+
+Internet-Draft                TTL Stretchng                 January 2014
+
+
+   records TTL, on the assumption that "stale bread if better than no
+   bread".
 
    Here is a reference to an "external" (non-RFC / draft) thing:
    ([IANA.AS_Numbers]).  And this is a link to an
@@ -106,16 +141,6 @@ Table of Contents
 
    TODO: Fill this out!
 
-
-
-
-
-
-Kumari                   Expires August 3, 2015                 [Page 2]
-
-Internet-Draft                  template                    January 2015
-
-
 5.  Acknowledgements
 
    The authors wish to thank some folk.
@@ -129,7 +154,9 @@ Internet-Draft                  template                    January 2015
               <http://www.iana.org/assignments/as-numbers>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, March 1997.
+              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
+              RFC2119, March 1997,
+              <http://www.rfc-editor.org/info/rfc2119>.
 
 6.2.  Informative References
 
@@ -138,11 +165,23 @@ Internet-Draft                  template                    January 2015
               issued by IANA", draft-ietf-sidr-iana-objects-03 (work in
               progress), May 2011.
 
+
+
+Kumari                   Expires August 3, 2014                 [Page 3]
+
+Internet-Draft                TTL Stretchng                 January 2014
+
+
+   [I-D.wkumari-dnsop-hammer]
+              Kumari, W., Arends, R., and S. Woolf, "Highly Automated
+              Method for Maintaining Expiring Records", draft-wkumari-
+              dnsop-hammer-00 (work in progress), July 2013.
+
 Appendix A.  Changes / Author Notes.
 
    [RFC Editor: Please remove this section before publication ]
 
-   From -00 to -01.
+   From -00 to -01
 
    o  Nothing changed in the template!
 
@@ -167,5 +206,22 @@ Author's Address
 
 
 
-Kumari                   Expires August 3, 2015                 [Page 3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kumari                   Expires August 3, 2014                 [Page 4]
 ```
