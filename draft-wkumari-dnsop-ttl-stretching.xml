@@ -85,9 +85,12 @@
       contact the authorative server, it simply extends the existing records
       TTL, on the assumption that "stale bread if better than no bread". </t>
 
-      <t>Here is a reference to an "external" (non-RFC / draft) thing: (<xref
-      target="IANA.AS_Numbers"/>). And this is a link to an ID:<xref
-      target="I-D.ietf-sidr-iana-objects"/>.</t>
+      <t>[Ed: This is the primary point of the document / question -- if you
+      cannot reach the authorative nameservers (perhaps they are under a DoS,
+      perhaps they were unplugged, you cannot really tell) it is better to use
+      the last known (and perhaps outdated) information, or is it better for
+      the domain to do dark? I tihnk the former, but this is a significant
+      change to the meaning / semantics of TTLs).</t>
 
       <section title="Requirements notation">
         <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -97,10 +100,15 @@
       </section>
     </section>
 
-    <section title="Another section.">
-      <t>Template.</t>
+    <section title="Proposal">
+      <t>If a recursive nameserver is unable to contact any of the authorative
+      nameservers for a zone, and it still has the resource record cached, it
+      MAY "stretch" the TTL by simply increasing it it by the original TTL. It
+      may do this N times, where N should be configurable.</t>
 
-      <t/>
+      <t>[ Ed: I was going to say "by doubling the TTL", but then if we allow
+      implmentations to do this e.g 3 times, is that 4 times the original TTL,
+      or is it 2^3 the original TTL].</t>
     </section>
 
     <section title="IANA Considerations">

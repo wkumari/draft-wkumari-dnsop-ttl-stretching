@@ -79,13 +79,13 @@ Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Requirements notation . . . . . . . . . . . . . . . . . .   3
-   2.  Another section.  . . . . . . . . . . . . . . . . . . . . . .   3
+   2.  Proposal  . . . . . . . . . . . . . . . . . . . . . . . . . .   3
    3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   3
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
    5.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   3
    6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   3
      6.1.  Normative References  . . . . . . . . . . . . . . . . . .   3
-     6.2.  Informative References  . . . . . . . . . . . . . . . . .   3
+     6.2.  Informative References  . . . . . . . . . . . . . . . . .   4
    Appendix A.  Changes / Author Notes.  . . . . . . . . . . . . . .   4
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
 
@@ -119,9 +119,12 @@ Internet-Draft                TTL Stretchng                 January 2014
    records TTL, on the assumption that "stale bread if better than no
    bread".
 
-   Here is a reference to an "external" (non-RFC / draft) thing:
-   ([IANA.AS_Numbers]).  And this is a link to an
-   ID:[I-D.ietf-sidr-iana-objects].
+   [Ed: This is the primary point of the document / question -- if you
+   cannot reach the authorative nameservers (perhaps they are under a
+   DoS, perhaps they were unplugged, you cannot really tell) it is
+   better to use the last known (and perhaps outdated) information, or
+   is it better for the domain to do dark?  I tihnk the former, but this
+   is a significant change to the meaning / semantics of TTLs).
 
 1.1.  Requirements notation
 
@@ -129,9 +132,16 @@ Internet-Draft                TTL Stretchng                 January 2014
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [RFC2119].
 
-2.  Another section.
+2.  Proposal
 
-   Template.
+   If a recursive nameserver is unable to contact any of the authorative
+   nameservers for a zone, and it still has the resource record cached,
+   it MAY "stretch" the TTL by simply increasing it it by the original
+   TTL.  It may do this N times, where N should be configurable.
+
+   [ Ed: I was going to say "by doubling the TTL", but then if we allow
+   implmentations to do this e.g 3 times, is that 4 times the original
+   TTL, or is it 2^3 the original TTL].
 
 3.  IANA Considerations
 
@@ -153,6 +163,15 @@ Internet-Draft                TTL Stretchng                 January 2014
               IANA, "Autonomous System (AS) Numbers",
               <http://www.iana.org/assignments/as-numbers>.
 
+
+
+
+
+Kumari                   Expires August 3, 2014                 [Page 3]
+
+Internet-Draft                TTL Stretchng                 January 2014
+
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
               RFC2119, March 1997,
@@ -164,13 +183,6 @@ Internet-Draft                TTL Stretchng                 January 2014
               Manderson, T., Vegoda, L., and S. Kent, "RPKI Objects
               issued by IANA", draft-ietf-sidr-iana-objects-03 (work in
               progress), May 2011.
-
-
-
-Kumari                   Expires August 3, 2014                 [Page 3]
-
-Internet-Draft                TTL Stretchng                 January 2014
-
 
    [I-D.wkumari-dnsop-hammer]
               Kumari, W., Arends, R., and S. Woolf, "Highly Automated
@@ -194,18 +206,6 @@ Author's Address
    US
 
    Email: warren@kumari.net
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
