@@ -52,12 +52,12 @@
       may be better than no data. </t>
 
       <t>PLEASE NOTE: This document is a strawman to drive discussion. It may
-      or may not be a good idea, this document documents the idea so that
+      or may not be a good idea; this document documents the idea so that
       there is something concrete to throw tomatoes at.</t>
 
       <t>[ Ed note: Text inside square brackets ([]) is additional background
-      information, answers to freqently asked questions, general musings, etc.
-      They will be removed before publication. This document is being
+      information, answers to frequently asked questions, general musings,
+      etc. They will be removed before publication. This document is being
       collaborated on in Github at:
       https://github.com/wkumari/draft-wkumari-dnsop-ttl-stretching. The most
       recent version of the document, open issues, etc should all be available
@@ -69,27 +69,27 @@
     <section title="Introduction">
       <t>DNS Resource Records (RR) have an associated TTL. This is how long
       the record may be cached before it should be expired and new information
-      fetched. This is based upon the assumption that the authorative servers
-      will be reachable when they are needed, and that records expire and are
-      immediatly evicted from the cache.</t>
+      fetched. This is based upon the assumption that the authoritative
+      servers will be reachable when they are needed, and that records expire
+      and are immediately evicted from the cache.</t>
 
-      <t>There are a number of reasons why an authorative server may become
-      unreachable, including, unfortunalty, Denial of Service (DoS) attacks.
-      Recent proposals, for exmaple "Highly Automated Method for Maintaining
+      <t>There are a number of reasons why an authoritative server may become
+      unreachable, including, unfortunately, Denial of Service (DoS) attacks.
+      Recent proposals, for example "Highly Automated Method for Maintaining
       Expiring Records" (<xref target="I-D.wkumari-dnsop-hammer"/>) propose
       refreshing records in the cache before they expire and are evicted. This
       means that the recursive server still has information in its cache when
-      it attempts to contact the authorative server. </t>
+      it attempts to contact the authoritative server. </t>
 
       <t>This document suggests that, if the recursive server is unable to
-      contact the authorative server, it simply extends the existing records
+      contact the authoritative server, it simply extends the existing records
       TTL, on the assumption that "stale bread if better than no bread". </t>
 
       <t>[Ed: This is the primary point of the document / question -- if you
-      cannot reach the authorative nameservers (perhaps they are under a DoS,
+      cannot reach the authoritative nameservers (perhaps they being DoS-ed,
       perhaps they were unplugged, you cannot really tell) it is better to use
       the last known (and perhaps outdated) information, or is it better for
-      the domain to do dark? I tihnk the former, but this is a significant
+      the domain to go dark? I think the former, but this is a significant
       change to the meaning / semantics of TTLs).</t>
 
       <section title="Requirements notation">
@@ -101,14 +101,15 @@
     </section>
 
     <section title="Proposal">
-      <t>If a recursive nameserver is unable to contact any of the authorative
-      nameservers for a zone, and it still has the resource record cached, it
-      MAY "stretch" the TTL by simply increasing it it by the original TTL. It
-      may do this N times, where N should be configurable.</t>
+      <t>If a recursive nameserver is unable to contact any of the
+      authoritative nameservers for a zone, and it still has the resource
+      record cached, it MAY "stretch" the TTL by simply increasing it it by
+      the original TTL. It may do this N times, where N should be
+      configurable.</t>
 
       <t>[ Ed: I was going to say "by doubling the TTL", but then if we allow
-      implmentations to do this e.g 3 times, is that 4 times the original TTL,
-      or is it 2^3 the original TTL].</t>
+      implementations to do this e.g 3 times, is that 4 times the original
+      TTL, or is it 2^3 the original TTL].</t>
     </section>
 
     <section title="IANA Considerations">

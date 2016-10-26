@@ -22,11 +22,11 @@ Abstract
    data may be better than no data.
 
    PLEASE NOTE: This document is a strawman to drive discussion.  It may
-   or may not be a good idea, this document documents the idea so that
+   or may not be a good idea; this document documents the idea so that
    there is something concrete to throw tomatoes at.
 
    [ Ed note: Text inside square brackets ([]) is additional background
-   information, answers to freqently asked questions, general musings,
+   information, answers to frequently asked questions, general musings,
    etc.  They will be removed before publication.  This document is
    being collaborated on in Github at: https://github.com/wkumari/draft-
    wkumari-dnsop-ttl-stretching.  The most recent version of the
@@ -94,19 +94,19 @@ Table of Contents
    DNS Resource Records (RR) have an associated TTL.  This is how long
    the record may be cached before it should be expired and new
    information fetched.  This is based upon the assumption that the
-   authorative servers will be reachable when they are needed, and that
-   records expire and are immediatly evicted from the cache.
+   authoritative servers will be reachable when they are needed, and
+   that records expire and are immediately evicted from the cache.
 
-   There are a number of reasons why an authorative server may become
-   unreachable, including, unfortunalty, Denial of Service (DoS)
-   attacks.  Recent proposals, for exmaple "Highly Automated Method for
+   There are a number of reasons why an authoritative server may become
+   unreachable, including, unfortunately, Denial of Service (DoS)
+   attacks.  Recent proposals, for example "Highly Automated Method for
    Maintaining Expiring Records" ([I-D.wkumari-dnsop-hammer]) propose
    refreshing records in the cache before they expire and are evicted.
    This means that the recursive server still has information in its
-   cache when it attempts to contact the authorative server.
+   cache when it attempts to contact the authoritative server.
 
    This document suggests that, if the recursive server is unable to
-   contact the authorative server, it simply extends the existing
+   contact the authoritative server, it simply extends the existing
 
 
 
@@ -120,11 +120,11 @@ Internet-Draft                TTL Stretchng                 January 2014
    bread".
 
    [Ed: This is the primary point of the document / question -- if you
-   cannot reach the authorative nameservers (perhaps they are under a
-   DoS, perhaps they were unplugged, you cannot really tell) it is
-   better to use the last known (and perhaps outdated) information, or
-   is it better for the domain to do dark?  I tihnk the former, but this
-   is a significant change to the meaning / semantics of TTLs).
+   cannot reach the authoritative nameservers (perhaps they being DoS-
+   ed, perhaps they were unplugged, you cannot really tell) it is better
+   to use the last known (and perhaps outdated) information, or is it
+   better for the domain to go dark?  I think the former, but this is a
+   significant change to the meaning / semantics of TTLs).
 
 1.1.  Requirements notation
 
@@ -134,13 +134,14 @@ Internet-Draft                TTL Stretchng                 January 2014
 
 2.  Proposal
 
-   If a recursive nameserver is unable to contact any of the authorative
-   nameservers for a zone, and it still has the resource record cached,
-   it MAY "stretch" the TTL by simply increasing it it by the original
-   TTL.  It may do this N times, where N should be configurable.
+   If a recursive nameserver is unable to contact any of the
+   authoritative nameservers for a zone, and it still has the resource
+   record cached, it MAY "stretch" the TTL by simply increasing it it by
+   the original TTL.  It may do this N times, where N should be
+   configurable.
 
    [ Ed: I was going to say "by doubling the TTL", but then if we allow
-   implmentations to do this e.g 3 times, is that 4 times the original
+   implementations to do this e.g 3 times, is that 4 times the original
    TTL, or is it 2^3 the original TTL].
 
 3.  IANA Considerations
@@ -162,7 +163,6 @@ Internet-Draft                TTL Stretchng                 January 2014
    [IANA.AS_Numbers]
               IANA, "Autonomous System (AS) Numbers",
               <http://www.iana.org/assignments/as-numbers>.
-
 
 
 
