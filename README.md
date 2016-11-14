@@ -6,8 +6,8 @@
 
 Network Working Group                                          W. Kumari
 Internet-Draft                                                    Google
-Intended status: Informational                          January 30, 2014
-Expires: August 3, 2014
+Intended status: Informational                         November 14, 2016
+Expires: May 18, 2017
 
 
                           Stretching DNS TTLs
@@ -48,21 +48,21 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 3, 2014.
+   This Internet-Draft will expire on May 18, 2017.
 
 
 
 
 
 
-Kumari                   Expires August 3, 2014                 [Page 1]
+Kumari                    Expires May 18, 2017                  [Page 1]
 
-Internet-Draft                TTL Stretchng                 January 2014
+Internet-Draft                TTL Stretchng                November 2016
 
 
 Copyright Notice
 
-   Copyright (c) 2014 IETF Trust and the persons identified as the
+   Copyright (c) 2016 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -111,9 +111,9 @@ Table of Contents
 
 
 
-Kumari                   Expires August 3, 2014                 [Page 2]
+Kumari                    Expires May 18, 2017                  [Page 2]
 
-Internet-Draft                TTL Stretchng                 January 2014
+Internet-Draft                TTL Stretchng                November 2016
 
 
    records TTL, on the assumption that "stale bread if better than no
@@ -167,9 +167,9 @@ Internet-Draft                TTL Stretchng                 January 2014
 
 
 
-Kumari                   Expires August 3, 2014                 [Page 3]
+Kumari                    Expires May 18, 2017                  [Page 3]
 
-Internet-Draft                TTL Stretchng                 January 2014
+Internet-Draft                TTL Stretchng                November 2016
 
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -223,5 +223,5 @@ Author's Address
 
 
 
-Kumari                   Expires August 3, 2014                 [Page 4]
+Kumari                    Expires May 18, 2017                  [Page 4]
 ```

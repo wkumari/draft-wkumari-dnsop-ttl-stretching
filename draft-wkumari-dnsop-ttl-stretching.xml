@@ -42,14 +42,14 @@
       </address>
     </author>
 
-    <date day="30" month="January" year="2014"/>
+    <date day="14" month="November" year="2016"/>
 
     <abstract>
       <t>The TTL of a DNS Resource Record expresses how long a record may be
       cached before it should be discarded. This document discusses the
       possibility of "stretching TTLS" (using them past their expiration) if
       they cannot be refreshed. This works on the assumption that stale data
-      may be better than no data. </t>
+      may be better than no data.</t>
 
       <t>PLEASE NOTE: This document is a strawman to drive discussion. It may
       or may not be a good idea; this document documents the idea so that
@@ -79,11 +79,11 @@
       Expiring Records" (<xref target="I-D.wkumari-dnsop-hammer"/>) propose
       refreshing records in the cache before they expire and are evicted. This
       means that the recursive server still has information in its cache when
-      it attempts to contact the authoritative server. </t>
+      it attempts to contact the authoritative server.</t>
 
       <t>This document suggests that, if the recursive server is unable to
       contact the authoritative server, it simply extends the existing records
-      TTL, on the assumption that "stale bread if better than no bread". </t>
+      TTL, on the assumption that "stale bread if better than no bread".</t>
 
       <t>[Ed: This is the primary point of the document / question -- if you
       cannot reach the authoritative nameservers (perhaps they being DoS-ed,
